@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/build
+# /build # since the server is not powerful enough to run the build HA!
 
 # misc
 .DS_Store
