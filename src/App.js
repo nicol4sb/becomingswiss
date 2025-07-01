@@ -181,7 +181,6 @@ function App() {
             viewport={{ once: true }}
           >
             <h2>{t('cta_title')}</h2>
-            <p>{t('cta_subtitle')}</p>
             
             <div className="cta-buttons">
               <motion.a 

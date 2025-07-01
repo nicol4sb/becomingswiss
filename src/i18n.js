@@ -32,9 +32,9 @@ const resources = {
       testimonial2_location: "Thalwil, Switzerland",
 
       // CTA Section
-      cta_title: "Ready to Start Your Journey?",
+      cta_title: "Ready to Start?",
       cta_subtitle: "Contact us today for a free consultation and take the first step towards becoming Swiss.",
-      cta_whatsapp: "Chat on WhatsApp",
+      cta_whatsapp: "Drop us a message",
       whatsapp_message: "Hi! I need some support with the Swiss passport application process. Could we chat?",
 
       // Footer
@@ -73,9 +73,9 @@ const resources = {
       testimonial2_location: "Thalwil, Schweiz",
 
       // CTA Section
-      cta_title: "Bereit, Ihre Reise zu beginnen?",
+      cta_title: "Bereit zu starten?",
       cta_subtitle: "Kontaktieren Sie uns heute für eine kostenlose Beratung und machen Sie den ersten Schritt zur Schweizer Staatsbürgerschaft.",
-      cta_whatsapp: "WhatsApp Chat",
+      cta_whatsapp: "Schreiben Sie uns",
       whatsapp_message: "Hallo! Ich brauche Unterstützung beim Schweizer Passantragsverfahren. Können wir chatten?",
 
       // Footer
@@ -114,9 +114,9 @@ const resources = {
       testimonial2_location: "Thalwil, Suisse",
 
       // CTA Section
-      cta_title: "Prêt à Commencer Votre Voyage ?",
+      cta_title: "Prêt à Commencer ?",
       cta_subtitle: "Contactez-nous aujourd'hui pour une consultation gratuite et faites le premier pas vers la citoyenneté suisse.",
-      cta_whatsapp: "Chat WhatsApp",
+      cta_whatsapp: "Envoyez-nous un message",
       whatsapp_message: "Salut ! J'ai besoin d'aide pour le processus de demande de passeport suisse. On peut discuter ?",
 
       // Footer
