@@ -184,7 +184,7 @@ function App() {
             
             <div className="cta-buttons">
               <motion.a 
-                href={`https://wa.me/41764071979?text=${encodeURIComponent(t('whatsapp_message'))}`}
+                href={`https://wa.me/41772879848?text=${encodeURIComponent(t('whatsapp_message'))}`}
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="btn btn-secondary"
