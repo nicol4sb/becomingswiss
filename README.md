@@ -1,30 +1,84 @@
-# Getting Started with Create React App
+# Becoming Swiss - Simple Logging Setup
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React application for Swiss citizenship services with basic server-side logging.
 
-## Available Scripts
+## Quick Start
 
-In the project directory, you can run:
+```bash
+# Install dependencies
+npm install
 
-### `npm start`
+# Build the React app
+npm run build
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Start the server
+npm run server
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Logging & Analysis
 
-### `npm test`
+The server creates logs in the `logs/` directory:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- `access.log` - Apache-style HTTP access logs (perfect for grepping)
+- `error.log` - Error logs only  
+- `combined.log` - All logs in JSON format
 
-### `npm run build`
+### Useful Commands
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+# Follow logs in real-time
+npm run logs:access
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Get log statistics
+npm run logs:stats
 
-## prompt
+# View errors
+npm run logs:errors
+
+# Clean logs
+npm run logs:clean
+```
+
+### Useful Grep Commands
+
+```bash
+# Count total requests
+grep -c "GET\|POST" logs/access.log
+
+# Find requests from specific IP
+grep "192.168.1.100" logs/access.log
+
+# Find 404 errors
+grep " 404 " logs/access.log
+
+# Find requests to specific path
+grep "/api/" logs/access.log
+
+# Count requests by hour
+grep -o "\[.*\]" logs/access.log | cut -d: -f2 | sort | uniq -c
+
+# Find slow requests (>1 second)
+grep -E " [0-9]{4,} " logs/access.log
+
+# Find mobile user agents
+grep -i "mobile\|android\|iphone" logs/access.log
+
+# Find requests from today
+grep "$(date '+%d/%b/%Y')" logs/access.log
+```
+
+## Health Check
+
+The server provides a health check endpoint:
+- `GET /api/health` - Returns server status and uptime
+
+## Development
+
+```bash
+# Run both React app and server
+npm run dev
+
+# Or run separately:
+npm start          # React app on port 3000
+npm run server     # Express server on port 6000
+```
