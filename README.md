@@ -23,6 +23,7 @@ The server creates logs in the `logs/` directory:
 - `error.log` - Error logs only  
 - `combined.log` - All logs in JSON format
 
+
 ### Useful Commands
 
 ```bash
