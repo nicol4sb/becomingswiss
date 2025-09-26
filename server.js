@@ -69,30 +69,10 @@ app.get('/api/health', (req, res) => {
 app.use(express.static(path.join(__dirname, 'build')));
 
 // Handle React routing, return all requests to React app
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  logger.error('Unhandled error', {
-    error: err.message,
-    stack: err.stack,
-    url: req.url,
-    method: req.method,
-    ip: req.ip,
-    userAgent: req.get('User-Agent')
-  });
-  
-  res.status(500).json({ 
-    error: 'Internal Server Error',
-    timestamp: new Date().toISOString()
-  });
-});
-
 app.listen(PORT, () => {
-  logger.info(`Server started on port ${PORT}`);
-  console.log(`🚀 Server is running on port ${PORT}`);
-  console.log(`📝 Logs are being written to the 'logs' directory`);
-  console.log(`💚 Health check: http://localhost:${PORT}/api/health`);
+  console.log(`Server is running on port ${PORT}`);
 });
