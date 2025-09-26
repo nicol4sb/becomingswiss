@@ -1,0 +1,27 @@
+{
+  "totalRequests": 3,
+  "uniqueIPs": [
+    "::ffff:127.0.0.1"
+  ],
+  "browsers": {
+    "Firefox 141.0": 3
+  },
+  "operatingSystems": {
+    "Linux Unknown": 3
+  },
+  "referrers": {
+    "Direct": 2,
+    "http://localhost:6000/api/analytics": 1
+  },
+  "pages": {
+    "/api/analytics": 2,
+    "/favicon.ico": 1
+  },
+  "hourlyStats": {
+    "16": 3
+  },
+  "dailyStats": {
+    "2025-09-26": 3
+  },
+  "lastUpdated": "2025-09-26T14:25:16.810Z"
+}

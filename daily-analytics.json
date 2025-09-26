@@ -1,0 +1,19 @@
+{
+  "2025-09-26": {
+    "totalRequests": 3,
+    "uniqueIPs": {},
+    "browsers": {
+      "Firefox 141.0": 3
+    },
+    "operatingSystems": {
+      "Linux Unknown": 3
+    },
+    "pages": {
+      "/api/analytics": 2,
+      "/favicon.ico": 1
+    },
+    "hourlyStats": {
+      "16": 3
+    }
+  }
+}

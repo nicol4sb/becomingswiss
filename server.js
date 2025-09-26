@@ -3,6 +3,7 @@ const path = require('path');
 const morgan = require('morgan');
 const winston = require('winston');
 const fs = require('fs');
+const analytics = require('./analytics');
 
 const app = express();
 const PORT = process.env.PORT || 6000;
@@ -39,6 +40,12 @@ const logger = winston.createLogger({
   ]
 });
 
+// Load existing analytics data
+analytics.loadAnalyticsData(logger);
+
+// Analytics middleware (should be before morgan)
+app.use(analytics.createAnalyticsMiddleware(logger));
+
 // Morgan middleware for HTTP request logging
 // This creates Apache-style access logs
 app.use(morgan('combined', {
@@ -63,6 +70,17 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString(),
     uptime: process.uptime()
   });
+});
+
+// Analytics endpoint
+app.get('/api/analytics', (req, res) => {
+  try {
+    const response = analytics.generateAnalyticsResponse(logger);
+    res.json(response);
+  } catch (error) {
+    logger.error('Error generating analytics:', error);
+    res.status(500).json({ error: 'Failed to generate analytics' });
+  }
 });
 
 // Serve the static files from the React app
@@ -90,9 +108,23 @@ app.use((err, req, res, next) => {
   });
 });
 
+// Save analytics data on server shutdown
+process.on('SIGINT', () => {
+  logger.info('Saving analytics data before shutdown...');
+  analytics.saveAnalyticsData(logger);
+  process.exit(0);
+});
+
+process.on('SIGTERM', () => {
+  logger.info('Saving analytics data before shutdown...');
+  analytics.saveAnalyticsData(logger);
+  process.exit(0);
+});
+
 app.listen(PORT, () => {
   logger.info(`Server started on port ${PORT}`);
   console.log(`🚀 Server is running on port ${PORT}`);
-  console.log(`📝 Logs are being written to the 'logs' directory`);
+  console.log(`�� Logs are being written to the 'logs' directory`);
   console.log(`💚 Health check: http://localhost:${PORT}/api/health`);
+  console.log(`📊 Analytics: http://localhost:${PORT}/api/analytics`);
 });
