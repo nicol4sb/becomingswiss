@@ -75,12 +75,43 @@ app.get('/api/health', (req, res) => {
 // Analytics endpoint
 app.get('/api/analytics', (req, res) => {
   try {
-    const response = analytics.generateAnalyticsResponse(logger);
+    const { format = 'detailed', limit = 10 } = req.query;
+    
+    // Validate format parameter
+    const validFormats = ['detailed', 'summary', 'minimal'];
+    const responseFormat = validFormats.includes(format) ? format : 'detailed';
+    
+    // Validate limit parameter
+    const responseLimit = parseInt(limit) || 10;
+    const clampedLimit = Math.min(Math.max(responseLimit, 1), 50); // Clamp between 1 and 50
+    
+    const options = {
+      format: responseFormat,
+      limit: clampedLimit
+    };
+    
+    const response = analytics.generateAnalyticsResponse(logger, options);
+    
+    // Set appropriate content type and headers for better readability
+    res.set({
+      'Content-Type': 'application/json',
+      'X-Analytics-Format': responseFormat,
+      'X-Analytics-Limit': clampedLimit.toString()
+    });
+    
     res.json(response);
   } catch (error) {
     logger.error('Error generating analytics:', error);
-    res.status(500).json({ error: 'Failed to generate analytics' });
+    res.status(500).json({ 
+      error: 'Failed to generate analytics',
+      timestamp: new Date().toISOString()
+    });
   }
+});
+
+// Analytics dashboard page
+app.get('/analytics', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'analytics.html'));
 });
 
 // Serve the static files from the React app
@@ -124,7 +155,10 @@ process.on('SIGTERM', () => {
 app.listen(PORT, () => {
   logger.info(`Server started on port ${PORT}`);
   console.log(`🚀 Server is running on port ${PORT}`);
-  console.log(`�� Logs are being written to the 'logs' directory`);
+  console.log(`📝 Logs are being written to the 'logs' directory`);
   console.log(`💚 Health check: http://localhost:${PORT}/api/health`);
-  console.log(`📊 Analytics: http://localhost:${PORT}/api/analytics`);
+  console.log(`📊 Analytics API: http://localhost:${PORT}/api/analytics`);
+  console.log(`📊 Analytics Dashboard: http://localhost:${PORT}/analytics`);
+  console.log(`📊 Analytics (minimal): http://localhost:${PORT}/api/analytics?format=minimal`);
+  console.log(`📊 Analytics (summary): http://localhost:${PORT}/api/analytics?format=summary&limit=5`);
 });
