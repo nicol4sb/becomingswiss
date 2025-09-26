@@ -1,44 +1,45 @@
 {
   "metadata": {
     "version": "1.0.0",
-    "lastUpdated": "2025-09-26T14:53:56.996Z",
-    "totalRecords": 21,
+    "lastUpdated": "2025-09-26T14:59:52.827Z",
+    "totalRecords": 30,
     "uniqueVisitors": 2
   },
   "data": {
-    "totalRequests": 21,
+    "totalRequests": 30,
     "uniqueIPs": [
       "::1",
       "::ffff:127.0.0.1"
     ],
     "browsers": {
-      "Unknown Unknown": 16,
-      "Firefox 141.0": 5
+      "Unknown Unknown": 17,
+      "Firefox 141.0": 13
     },
     "operatingSystems": {
-      "Unknown Unknown": 16,
-      "Linux Unknown": 5
+      "Unknown Unknown": 17,
+      "Linux Unknown": 13
     },
     "referrers": {
-      "Direct": 9,
+      "Direct": 14,
       "https://www.google.com/search?q=becoming+swiss+citizen": 4,
       "https://www.facebook.com/some-post": 2,
       "https://twitter.com/some-tweet": 1,
       "https://www.reddit.com/r/switzerland": 2,
       "https://www.bing.com/search?q=swiss+passport": 1,
       "https://www.google.com/search?q=swiss+citizenship": 1,
-      "http://localhost:6000/analytics": 1
+      "http://localhost:6000/analytics": 5
     },
     "pages": {
-      "/api/analytics": 19,
-      "/analytics": 2
+      "/api/analytics": 23,
+      "/analytics": 6,
+      "/favicon.ico": 1
     },
     "hourlyStats": {
-      "16": 21
+      "16": 30
     },
     "dailyStats": {
-      "2025-09-26": 21
+      "2025-09-26": 30
     },
-    "lastUpdated": "2025-09-26T14:53:56.995Z"
+    "lastUpdated": "2025-09-26T14:59:48.243Z"
   }
 }

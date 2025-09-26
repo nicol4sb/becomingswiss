@@ -109,9 +109,53 @@ app.get('/api/analytics', (req, res) => {
   }
 });
 
-// Analytics dashboard page
+// Analytics dashboard page - MUST be before the React catch-all route
 app.get('/analytics', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'analytics.html'));
+  try {
+    // Try multiple possible paths for the analytics.html file
+    const possiblePaths = [
+      path.join(__dirname, 'public', 'analytics.html'),
+      path.join(__dirname, 'analytics.html'),
+      path.join(process.cwd(), 'public', 'analytics.html'),
+      path.join(process.cwd(), 'analytics.html')
+    ];
+    
+    let filePath = null;
+    for (const testPath of possiblePaths) {
+      if (fs.existsSync(testPath)) {
+        filePath = testPath;
+        break;
+      }
+    }
+    
+    if (filePath) {
+      logger.info('Serving analytics dashboard', { filePath });
+      res.sendFile(filePath);
+    } else {
+      logger.error('Analytics dashboard file not found', { 
+        searchedPaths: possiblePaths,
+        currentDir: __dirname,
+        workingDir: process.cwd()
+      });
+      res.status(404).send(`
+        <h1>Analytics Dashboard Not Found</h1>
+        <p>The analytics dashboard file could not be located.</p>
+        <p>Searched paths:</p>
+        <ul>
+          ${possiblePaths.map(p => `<li>${p}</li>`).join('')}
+        </ul>
+        <p>Current directory: ${__dirname}</p>
+        <p>Working directory: ${process.cwd()}</p>
+      `);
+    }
+  } catch (error) {
+    logger.error('Error serving analytics dashboard:', error);
+    res.status(500).send(`
+      <h1>Error Loading Analytics Dashboard</h1>
+      <p>An error occurred while loading the analytics dashboard.</p>
+      <p>Error: ${error.message}</p>
+    `);
+  }
 });
 
 // Serve the static files from the React app

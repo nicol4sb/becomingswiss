@@ -1,24 +1,25 @@
 {
   "2025-09-26": {
-    "totalRequests": 21,
+    "totalRequests": 30,
     "uniqueIPs": [
       "::1",
       "::ffff:127.0.0.1"
     ],
     "browsers": {
-      "Unknown Unknown": 16,
-      "Firefox 141.0": 5
+      "Unknown Unknown": 17,
+      "Firefox 141.0": 13
     },
     "operatingSystems": {
-      "Unknown Unknown": 16,
-      "Linux Unknown": 5
+      "Unknown Unknown": 17,
+      "Linux Unknown": 13
     },
     "pages": {
-      "/api/analytics": 19,
-      "/analytics": 2
+      "/api/analytics": 23,
+      "/analytics": 6,
+      "/favicon.ico": 1
     },
     "hourlyStats": {
-      "16": 21
+      "16": 30
     }
   }
 }
